@@ -1,0 +1,39 @@
+@(msg: String) @main("Dokument Index") {
+<div class="container" data-ng-controller="DocumentListController" data-ng-init="init()">
+	<div class="row">
+		<div class="col-xs-12">
+			<h1>Dokumentübersicht</h1>
+		</div>
+		<div class="row">
+			<div class="col-xs-8">
+				<table class="documents-overview" style="width: 100%">
+					<tr>
+						<th>Titel</th>
+						<th>Autor</th>
+						<th>Zuletzt geändert</th>
+						<th></th>
+					</tr>
+					<tr data-ng-repeat="document in documents">
+						<td><a href="/document/{{document.id}}" data-ng-bind="document.title"></a></td>
+						<td><span data-ng-bind="document.givenname"></span>&nbsp;<span data-ng-bind="document.surname"></span></td>
+						<td> {{ document.changedAt | date:'yyyy-MM-dd HH:mm'}}</td>
+						<td>
+							<div class="btn-group btn-group-lg">
+								<a href="/document/{{document.id}}/keywords" class="btn btn-default">#</a>
+								<button type="button" class="btn btn-default delete-button" data-ng-click="deleteElement(document, $index)">
+									<span class="glyphicon glyphicon-trash delete"></span>
+								</button>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="sidebar-menu-container col-xs-4">
+				<ul class="nav nav-pills nav-stacked">
+					<li><a href="/document/new">Neues Dokument</a></li>
+					<li><a href="/import/form">Importieren</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	}
